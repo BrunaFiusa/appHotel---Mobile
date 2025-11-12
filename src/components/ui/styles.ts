@@ -34,7 +34,42 @@ export const global = StyleSheet.create({
         padding: width * 0.02,
         shadowColor: "#000",
         shadowOpacity: 0.05,
-        shadowRadius: 10,
+        shadowRadius: 10, 
         elevation: 2
+    },
+    inputGroup: {
+        marginBottom: height * 0.02,
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: "600",
+        color: "#120715ff",
+        marginBottom: height * 0.01
+    },
+    inputIcon: {
+        backgroundColor: "#fff",
+        paddingLeft: width * 0.02 ,
+        flexDirection: "row",
+        alignItems: "center",
+        borderWidth: 2,
+        borderColor: "#420350ff",
+        borderRadius: 10
+    },
+    inputError: {
+        backgroundColor: "#fed5d5ff",
+        borderColor: "rgba(139, 0, 0, 1)",
+    },
+    input: {
+        flex: 1,
+        fontSize: 16,
+        color: "#000",
+        fontWeight: "600",
+        paddingHorizontal: width * 0.02
+    },
+    errorText: {
+        color: "red",
+        fontWeight: "600",
+        fontSize: 13,
+        marginTop: height * 0.01
     },
 })
