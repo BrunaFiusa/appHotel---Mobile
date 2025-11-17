@@ -66,10 +66,31 @@ export const global = StyleSheet.create({
         fontWeight: "600",
         paddingHorizontal: width * 0.02
     },
+    eyeIcon: {
+        position: "absolute",
+        right: 12,
+        top: 42
+    },
     errorText: {
         color: "red",
         fontWeight: "600",
         fontSize: 13,
         marginTop: height * 0.01
     },
+     primaryButton: {
+        backgroundColor: "#420350ff",
+        borderRadius: 10,
+        padding: width * 0.025,
+        marginTop: width * 0.02,
+        alignItems: "center"
+    },
+    primaryButtonDisabled: {
+        backgroundColor: "#9ca3af",
+        borderRadius: 10,
+    },
+    primaryButtonText: {
+        color: "#fff",
+        fontSize: 17,
+        fontWeight: 600
+    }
 })
