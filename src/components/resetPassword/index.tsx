@@ -1,4 +1,4 @@
-import { Dimensions, Text, TouchableOpacity, View, ViewComponent} from "react-native";
+import { Text, TouchableOpacity, View} from "react-native";
 import AuthContainer from "../ui/AuthContainer";
 import TextField from "../ui/TextField";
 import { global } from "../ui/styles";
@@ -10,14 +10,26 @@ const RenderResetPassword = () => {
     const router = useRouter();   
     
     return (
-        <AuthContainer 
-            icon="arrow-left"   
-            title="Redefinição de senha"
-            subtitle="Digite seu email para redefinir sua senha"
-        >
+        <View style={global.screenContainer}> 
+
+            <View style={global.divTurnLeft}> 
+                <TouchableOpacity onPress={() => router.push("/(auth)")}> 
+                    <MaterialCommunityIcons name="arrow-left" size={25} color="#4b0505" />
+                </TouchableOpacity>
+            </View>
+
+            <AuthContainer    
+                title="Redefinição de senha"
+            >
+
+            <View style={global.divText}>
+                    <Text style={global.text}>
+                        Digite seu e-mail para redefir sua senha.
+                    </Text>
+                </View>
 
             <TextField
-                label="Seu e-mail"
+                label=""
                 placeholder="user@email.com"
                 keyboardType="email-address"
             />
@@ -26,6 +38,11 @@ const RenderResetPassword = () => {
             <Text style={global.primaryButtonText}>Enviar e-mail</Text>
         </TouchableOpacity>
         </AuthContainer>
+        </View>
 )};
 
 export default RenderResetPassword;
+
+
+        
+    

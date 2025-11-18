@@ -92,5 +92,24 @@ export const global = StyleSheet.create({
         color: "#fff",
         fontSize: 17,
         fontWeight: 600
+    },
+    text: {
+        fontSize: 17,
+        fontWeight: "500",
+        textAlign: "center"
+    },
+    divText: {
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: 14,
+    },
+    screenContainer: {
+        flex: 1,
+    },
+    divTurnLeft: {
+        position: 'absolute',
+        top: 50,
+        left: 15,
+        zIndex: 10
     }
 })
