@@ -10,9 +10,9 @@ const RootLayout = () => {
     return (
         <React.Fragment>
             <StatusBar style="auto"/>
-            <Tabs>
-                <Tabs.Screen name="explorer" options={{title: 'Pesquisar',tabBarIcon: () => (<FontAwesome5 name="user-circle" size={24} color="black" />),}} />
-                <Tabs.Screen name="account" options={{ title: 'Minha Conta', tabBarIcon: () => (<FontAwesome5 name="search" size={24} color="black" />),}} />
+            <Tabs>             
+                <Tabs.Screen name="explorer" options={{title: 'Pesquisar',tabBarIcon: () => (<FontAwesome5 name="search" size={24} color="black" />),}} />
+                <Tabs.Screen name="account" options={{ title: 'Minha Conta', tabBarIcon: () => (<FontAwesome5 name="user-circle" size={24} color="black" />),}} />
                 <Tabs.Screen name="reservation" options={{ title: 'Reservas',tabBarIcon: () => (<FontAwesome5 name="briefcase" size={24} color="black" />),}} />
             </Tabs>
         </React.Fragment>
