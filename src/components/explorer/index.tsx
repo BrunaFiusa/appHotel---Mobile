@@ -1,11 +1,15 @@
 import { View, Text } from 'react-native';
-import { global } from '@/components/ui/styles';
+import AuthContainer from '../ui/AuthContainer';
+import DateSelector from '../ui/DateSelector';
  
 const RenderExplorer = () => {
    return (
-    <View style={global.container}>
-        <Text>Pesquisar</Text>
-    </View>
-   )
+        <AuthContainer>
+            <View>
+                <DateSelector />
+            </View>
+        </AuthContainer>
+   );
 }  
+
 export default RenderExplorer;

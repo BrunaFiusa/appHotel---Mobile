@@ -14,9 +14,12 @@ const RenderLogin = () => {
         <AuthContainer
             title="Bem-vindo"
             subtitle="Faça seu login para continuar!"
-            icon="hotel">
+            icon="hotel"
+        >
 
-            {/* children */}    
+            {/* children */}   
+            <View style={global.content}>
+
             <TextField
                 label="E-mail"
                 icon="email"
@@ -30,20 +33,20 @@ const RenderLogin = () => {
                 placeholder="*********"
             />
 
-        <TouchableOpacity style={[global.primaryButton]} onPress={() => router.push("/(tabs)/explorer")}>
-            <Text style={global.primaryButtonText}>Entrar</Text>
-        </TouchableOpacity>
-        <View style={{alignItems: "center", marginTop: height * 0.03}}>
-            <TouchableOpacity onPress={ () => router.push("/(auth)/resetPassword")}>
-                <Text style={{color: "#420350ff", fontSize: 17, fontWeight: 600}}>Esqueci minha senha</Text>
+            <TouchableOpacity style={[global.primaryButton]} onPress={() => router.push("/(tabs)/explorer")}>
+                <Text style={global.primaryButtonText}>Entrar</Text>
             </TouchableOpacity>
-            <View style={{backgroundColor: "#7c8390ff", width: width * 0.5, height: height * 0.001,
-                borderRadius: 10, marginTop: height * 0.03}}></View>
-            <TouchableOpacity onPress={() => router.push("/(auth)/register")} style={{ marginTop: height * 0.03}}>
-                <Text style={{color: "#1f1e1eff", fontWeight: 600, fontSize: 15}}>Não possui uma conta? Cadastre-se!</Text>
-            </TouchableOpacity>
-        </View>
-        </AuthContainer>
+            <View style={{alignItems: "center", marginTop: height * 0.03}}>
+                <TouchableOpacity onPress={ () => router.push("/(auth)/resetPassword")}>
+                    <Text style={{color: "#420350ff", fontSize: 17, fontWeight: 600}}>Esqueci minha senha</Text>
+                </TouchableOpacity>
+                <View style={{backgroundColor: "#7c8390ff", width: width * 0.5, height: height * 0.001, borderRadius: 10, marginTop: height * 0.03}}></View>
+                    <TouchableOpacity onPress={() => router.push("/(auth)/register")} style={{ marginTop: height * 0.03}}>
+                        <Text style={{color: "#1f1e1eff", fontWeight: 600, fontSize: 15}}>Não possui uma conta? Cadastre-se!</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </AuthContainer> 
 )};
 
 export default RenderLogin;

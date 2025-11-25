@@ -10,14 +10,20 @@ const RootLayout = () => {
     return (
         <React.Fragment>
             <StatusBar style="auto"/>
-            <Tabs>             
-                <Tabs.Screen name="explorer" options={{title: 'Pesquisar',tabBarIcon: () => (<FontAwesome5 name="search" size={24} color="black" />),}} />
-                <Tabs.Screen name="account" options={{ title: 'Minha Conta', tabBarIcon: () => (<FontAwesome5 name="user-circle" size={24} color="black" />),}} />
-                <Tabs.Screen name="reservation" options={{ title: 'Reservas',tabBarIcon: () => (<FontAwesome5 name="briefcase" size={24} color="black" />),}} />
+            <Tabs screenOptions={{
+                tabBarActiveTintColor: "#420350ff",
+                tabBarInactiveTintColor: "#f9ddffff",
+                headerShown: false,
+                tabBarStyle: {
+                    backgroundColor: "#824590ff",
+                }
+            }}>             
+                <Tabs.Screen name="explorer" options={{title: 'Pesquisar',tabBarIcon: ({ color }) => (<FontAwesome5 name="search" size={24} color={color} />),}} />
+                <Tabs.Screen name="account" options={{ title: 'Minha Conta', tabBarIcon: ({ color }) => (<FontAwesome5 name="user-circle" size={24} color={color} />),}} />
+                <Tabs.Screen name="reservation" options={{ title: 'Reservas',tabBarIcon: ({ color }) => (<FontAwesome5 name="briefcase" size={24} color={color} />),}} />
             </Tabs>
         </React.Fragment>
     )
 }
 
 export default RootLayout;
-

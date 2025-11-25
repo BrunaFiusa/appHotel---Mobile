@@ -24,7 +24,7 @@ export const global = StyleSheet.create({
         fontWeight: "800",
     },
     subtitle: {
-        fontSize: 25,
+        fontSize: 20,
         color: "purple",
         marginTop: 6,
     },
