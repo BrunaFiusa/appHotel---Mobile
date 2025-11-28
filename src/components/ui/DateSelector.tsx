@@ -1,13 +1,9 @@
-import { useState } from "react";
-import { View, Dimensions } from "react-native";
-import DatePicker, { getToday } from 'react-native-modern-datepicker';
+import { Dimensions, View } from "react-native";
+import DatePicker, { getToday } from "react-native-modern-datepicker";
 
-type Props = {
-  onSelectDate: (date: string) => void;
-};
+type Props = { onSelectDate: (date: string) => void; };
  
 const DateSelector = ({ onSelectDate }: Props) => {
-
   const { width, height } = Dimensions.get("window");
   const today = getToday();
   return (
@@ -24,16 +20,14 @@ const DateSelector = ({ onSelectDate }: Props) => {
           borderColor: '#9e62acff',
           textFontSize: 14,
           textHeaderFontSize: 15,
-      }}
-      style={{borderRadius: 15, width: width * 0.65, height: "auto"}}
-      isGregorian={true}
-      minimumDate={today}
-      onSelectedChange={(date) => {
-        onSelectDate(date);
-      }}
+        }}
+        style={{borderRadius: 15, width: width * 0.65, height: height * 0.35}}
+        isGregorian={true}
+        minimumDate={today}
+        onSelectedChange={(date) => { onSelectDate(date); }}
       />
-  </View>
-);
+    </View>
+  );
 };
- 
+
 export default DateSelector;

@@ -12,38 +12,39 @@ const RenderExplorer = () => {
 
    return (
         <AuthContainer>
-            <View>
-                <TouchableOpacity onPress={() => setCalendar("checkin")}>
-                    <TextField
-                        label="Check-in"
-                        icon={{ lib: "FontAwesome5", name: "calendar-alt"}}
-                        placeholder="Selecione a data"
-                        value={checkIn}
-                        />
-                </TouchableOpacity>
-                {calendar === "checkin" && (
-                    <DateSelector
-                        onSelectDate={(date) => {
-                            setCheckIn(date)
-                        }
-                    }/>
-                )}
+            <View style={{display: "flex", flexDirection: "row", gap: width * 0.1, justifyContent:"center",}}>
 
-                <TouchableOpacity onPress={() => setCalendar("checkout")}>
-                    <TextField
-                        label="Check-out"
-                        icon={{ lib: "FontAwesome5", name: "calendar-alt"}}
-                        placeholder="Selecione a data"
-                        value={checkOut}
-                        />
-                </TouchableOpacity>
-                {calendar === "checkout" && (
-                    <DateSelector
-                        onSelectDate={(date) => {
-                            setcheckOut(date)
-                        }
-                    }/>
-                )}
+                <View style={{display: "flex", flexDirection: "column"}}>
+                    <TouchableOpacity onPress={() => setCalendar("checkin")}>
+                        <View style={{width: width * 0.42}}>
+                            <TextField 
+                                label="Check-in"
+                                icon={{ lib: "FontAwesome5", name: "calendar-alt"}}
+                                placeholder="Selecione a data"
+                                value={checkIn}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                    {calendar === "checkin" && (
+                        <DateSelector onSelectDate={(date) => { setCheckIn(date)}}/>
+                    )}
+                </View>
+
+                <View style={{display: "flex", flexDirection: "column"}}>
+                    <TouchableOpacity onPress={() => setCalendar("checkout")}>
+                        <View style={{width: width * 0.42}}>
+                            <TextField
+                                label="Check-out"
+                                icon={{ lib: "FontAwesome5", name: "calendar-alt"}}
+                                placeholder="Selecione a data"
+                                value={checkOut}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                    {calendar === "checkout" && (
+                        <DateSelector onSelectDate={(date) => { setcheckOut(date)}}/>
+                    )}
+                </View>
             </View>
         </AuthContainer>
    );
