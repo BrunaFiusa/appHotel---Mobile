@@ -1,29 +1,27 @@
 import { useState } from "react";
-import { View, Dimensions, TouchableOpacity } from "react-native";
+import { Dimensions, TouchableOpacity, View } from "react-native";
 import AuthContainer from "../ui/AuthContainer";
-import TextField from "../ui/TextField";
 import DateSelector from "../ui/DateSelector";
 import RoomCard from "../ui/RoomCard";
+import TextField from "../ui/TextField";
 
 const RenderExplorer = () => {
   const { width, height } = Dimensions.get("window");
   const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setcheckOut] = useState("");
-  const [calendar, setCalendar] = useState<"checkin" | "checkout">();
+  const [checkOut, setCheckOut] = useState("");
+  const [calendar, setCalendar] = useState<"checkin" | "checkout" | null>(null);
 
   return (
     <AuthContainer>
       <View
         style={{
           display: "flex",
-          flexDirection: "row",
-          gap: width * 0.1,
           justifyContent: "center",
         }}
       >
         <View style={{ display: "flex", flexDirection: "column" }}>
           <TouchableOpacity onPress={() => setCalendar("checkin")}>
-            <View style={{ width: width * 0.42 }}>
+            <View style={{ width: width * 0.8 }}>
               <TextField
                 label="Check-in"
                 icon={{ lib: "FontAwesome5", name: "calendar-alt" }}
@@ -36,6 +34,7 @@ const RenderExplorer = () => {
             <DateSelector
               onSelectDate={(date) => {
                 setCheckIn(date);
+                setCalendar(null);
               }}
             />
           )}
@@ -43,7 +42,7 @@ const RenderExplorer = () => {
 
         <View style={{ display: "flex", flexDirection: "column" }}>
           <TouchableOpacity onPress={() => setCalendar("checkout")}>
-            <View style={{ width: width * 0.42 }}>
+            <View style={{ width: width * 0.8 }}>
               <TextField
                 label="Check-out"
                 icon={{ lib: "FontAwesome5", name: "calendar-alt" }}
@@ -55,7 +54,8 @@ const RenderExplorer = () => {
           {calendar === "checkout" && (
             <DateSelector
               onSelectDate={(date) => {
-                setcheckOut(date);
+                setCheckOut(date);
+                setCalendar(null);
               }}
             />
           )}
@@ -63,13 +63,14 @@ const RenderExplorer = () => {
       </View>
 
       <RoomCard
+        image={require("../../../assets/images/quarto.jpg")}
         label="Apartamento"
         icon={{
           lib: "FontAwesome5",
           name: "bed",
         }}
         description={{
-          title: "Características do quarto",
+          title: "Descrição do quarto",
           text: "1 cama de casal\n2 camas de solteiro",
           price: 180.9,
         }}
