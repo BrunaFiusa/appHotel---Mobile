@@ -1,18 +1,18 @@
 /*Função: definir o fluxo de navegação entre as telas disponíveis em Tab Navigator:*/
 
-import { Tabs } from "expo-router";
-import "../../components/ui/styles";
-import React from "react";
-import { StatusBar } from "expo-status-bar";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { Tabs } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import "../../components/ui/styles";
 
 const RootLayout = () => {
     return (
         <React.Fragment>
             <StatusBar style="auto"/>
             <Tabs screenOptions={{
-                tabBarActiveTintColor: "#420350ff",
-                tabBarInactiveTintColor: "#f9ddffff",
+                tabBarActiveTintColor: "#f9ddffff",
+                tabBarInactiveTintColor: "#420350ff",
                 headerShown: false,
                 tabBarStyle: {
                     backgroundColor: "#824590ff",
