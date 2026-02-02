@@ -7,11 +7,6 @@ import RoomCard from "../ui/RoomCard";
 import TextField from "../ui/TextField";
 import { global } from "../ui/styles";
 
-
-
-
-
-
 const RenderExplorer = () => {
   const { width, height } = Dimensions.get("window");
   const [checkIn, setCheckIn] = useState("");
