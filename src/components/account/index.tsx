@@ -1,4 +1,3 @@
-import MaskInput, { Masks } from "react-native-mask-input";
 import AuthContainer from '../ui/AuthContainer';
 import { TouchableOpacity, View, Text, Dimensions } from "react-native";
 import { Modal, Pressable } from "react-native";
@@ -42,7 +41,9 @@ const RenderAccount = () => {
             <TextField
                 label="CPF:"
                 placeholder="CPF"
-                value={cpf}
+                keyboardType="numeric"
+                isMasked={true}
+                type={'cpf'}
                 onChangeText={setCPF}
             />
 
@@ -51,6 +52,13 @@ const RenderAccount = () => {
                 icon={{ lib: "MaterialIcons", name: "call" }}
                 autoComplete="tel"
                 placeholder="Telefone"
+                isMasked={true}
+                    type={'cel-phone'}
+                    options={{
+                        maskType: 'BRL',
+                        withDDD: true,
+                        dddMask: '(99) '
+                    }}
                 value={telefone}
                 onChangeText={setTelefone}
             />

@@ -52,13 +52,13 @@ const RenderExplorer = () => {
         >
           <Pressable
             style={{
-              flex:1,
+              flex: 1,
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "rgba(0, 0, 0, 0.25)",
             }}
-             onPress={closeCalendar}>
-              
+            onPress={closeCalendar}>
+
             <Pressable onPress={() => { }}>
               {calendar === "checkin" && (
                 <DateSelector
@@ -89,8 +89,6 @@ const RenderExplorer = () => {
             }}
           />
         </View>
-
-
       </View>
 
       <RoomCard

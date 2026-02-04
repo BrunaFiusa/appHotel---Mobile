@@ -43,22 +43,34 @@ return (
     
             <TextField
                 label="Nome:"
-                placeholder="Digite Seu Nome:"
+                placeholder="Nome"
                 value={nome}
+                onChangeText={setNome}
             />
 
             <TextField
                 label="CPF:"
-                placeholder="999.999.999-9"
-                value={cpf}
+                placeholder="CPF"
+                keyboardType="numeric"
+                isMasked={true}
+                type={'cpf'}
+                onChangeText={setCPF}
             />
 
             <TextField
                 label="Telefone:"
                 icon={{ lib: "MaterialIcons", name: "call" }}
-                placeholder="99 99999-9999"
                 autoComplete="tel"
+                placeholder="Telefone"
+                isMasked={true}
+                    type={'cel-phone'}
+                    options={{
+                        maskType: 'BRL',
+                        withDDD: true,
+                        dddMask: '(99) '
+                    }}
                 value={telefone}
+                onChangeText={setTelefone}
             />
 
             <TextField
@@ -66,6 +78,7 @@ return (
                 icon={{ lib: "MaterialIcons", name: "email" }}
                 placeholder="user@email.com"
                 value={email}
+                onChangeText={setEmail}
             />  
 
             <PasswordField
@@ -73,6 +86,7 @@ return (
                 icon={{ lib: "MaterialIcons", name: "password" }}
                 placeholder="*********"
                 value={password}
+                onChangeText={setPassword}
             />
 
             <PasswordField
@@ -80,6 +94,7 @@ return (
                 icon={{ lib: "MaterialIcons", name: "password" }}
                 placeholder="*********"
                 value={passwordConfirm}
+                onChangeText={setPasswordConfirm}
             />
 
             <TouchableOpacity style={[global.primaryButton]}>

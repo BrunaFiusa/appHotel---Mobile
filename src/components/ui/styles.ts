@@ -34,7 +34,7 @@ export const global = StyleSheet.create({
         padding: width * 0.02,
         shadowColor: "#000",
         shadowOpacity: 0.05,
-        shadowRadius: 10, 
+        shadowRadius: 10,
         elevation: 2
     },
     inputGroup: {
@@ -48,7 +48,7 @@ export const global = StyleSheet.create({
     },
     inputIcon: {
         backgroundColor: "#fff",
-        paddingLeft: width * 0.02 ,
+        paddingLeft: width * 0.02,
         flexDirection: "row",
         alignItems: "center",
         borderWidth: 2,
@@ -77,7 +77,7 @@ export const global = StyleSheet.create({
         fontSize: 13,
         marginTop: height * 0.01
     },
-     primaryButton: {
+    primaryButton: {
         backgroundColor: "#420350ff",
         borderRadius: 10,
         padding: width * 0.025,
@@ -111,5 +111,14 @@ export const global = StyleSheet.create({
         top: 50,
         left: 15,
         zIndex: 10
+    },
+    item: {
+        marginBottom: 6,
+        color: "#444",
+    },
+    priceRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 6,
     }
 })
