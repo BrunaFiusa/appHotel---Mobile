@@ -1,5 +1,5 @@
 import { FontAwesome5, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
-import { Dimensions, Image, ImageSourcePropType, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, ImageSourcePropType, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { global } from "./styles";
 
 type NameIcon =
@@ -14,6 +14,7 @@ type Props = {
   label?: string;
   description?: Infos;
   icon?: NameIcon;
+  onPressReserve?: () => void;
 };
 
 const { width, height } = Dimensions.get("window");
@@ -37,6 +38,7 @@ const RoomCard = ({ image, label, description, icon }: Props) => {
                 {icon.lib === "FontAwesome6" && (
                   <FontAwesome6 name={icon.name} size={23} color="purple"/>
                 )}
+                
               </View>
             )}
             {!!description && (
@@ -49,6 +51,7 @@ const RoomCard = ({ image, label, description, icon }: Props) => {
                 </View>
               </View>
             )}
+            
           </View>
         </View>
       </View>

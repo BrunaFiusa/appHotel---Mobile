@@ -2,11 +2,11 @@ import { Dimensions } from "react-native";
 import InputSpinner from "react-native-input-spinner";
 
 type Props = {
-  onSelectSpin: (guests: string) => void;
+  onSelectSpin: (guests: number) => void;
 };
 
 const InputSpin = ({ onSelectSpin }: Props) => {
-  const { width, height } = Dimensions.get("window");
+  const { width } = Dimensions.get("window");
 
   return (
     <InputSpinner
@@ -15,9 +15,8 @@ const InputSpin = ({ onSelectSpin }: Props) => {
       step={1}
       colorMax={"#420350ff"}
       colorMin={"#420350ff"}
-      style={{
-        width: width * 0.45,
-      }}
+      style={{ width: width * 0.45 }}
+      onChange={(num: number) => onSelectSpin(num)}
     />
   );
 };

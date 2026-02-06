@@ -82,6 +82,7 @@ export const global = StyleSheet.create({
         borderRadius: 10,
         padding: width * 0.025,
         marginTop: width * 0.02,
+        marginBottom: width * 0.08,
         alignItems: "center"
     },
     primaryButtonDisabled: {
@@ -120,5 +121,11 @@ export const global = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 6,
+    },
+    separator: {
+        height: 2,
+        backgroundColor: '#e0e0e0',
+        marginVertical: 25,
+        width: '100%',
     }
 })
