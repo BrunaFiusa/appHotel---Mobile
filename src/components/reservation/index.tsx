@@ -19,7 +19,7 @@ const RenderReservation = () => {
           Sua reserva
         </Text>
 
-        <Text style={global.item}>📅 Datas: 12 – 14 Nov 2024</Text>
+        <Text style={global.item}>📅 Datas: 20 – 25 Fev 2026</Text>
         <Text style={global.item}>👤 Guest: 2 </Text>
         <Text style={global.item}>🛏 Tipo do Quarto: Casal</Text>
       </View>
@@ -38,7 +38,7 @@ const RenderReservation = () => {
 
         <View style={global.priceRow}>
           <Text>Preço</Text>
-          <Text>$139.00</Text>
+          <Text>$180.90</Text>
         </View>
 
         <View style={global.priceRow}>
@@ -48,14 +48,14 @@ const RenderReservation = () => {
 
         <View style={global.priceRow}>
           <Text style={{ fontWeight: "bold" }}>Preço Total</Text>
-          <Text style={{ fontWeight: "bold" }}>$141.50</Text>
+          <Text style={{ fontWeight: "bold" }}>$183.40</Text>
         </View>
       </View>
 
       <TouchableOpacity style={global.primaryButton}>
-        <Text style={global.primaryButtonText}>
-          Confirmar Reserva
-        </Text>
+          <Text style={global.primaryButtonText}>
+            Confirmar Reserva
+          </Text>
       </TouchableOpacity>
     </AuthContainer>
   );

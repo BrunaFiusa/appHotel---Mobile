@@ -7,8 +7,10 @@ import RoomCard from "../ui/RoomCard";
 import TextField from "../ui/TextField";
 import { global } from "../ui/styles";
 import BottomSheet from '../ui/BottomSheet';
+import { useRouter } from "expo-router";
 
 const RenderExplorer = () => {
+  const router = useRouter();
   const { width, height } = Dimensions.get("window");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -107,7 +109,6 @@ const RenderExplorer = () => {
                 setQntGuests(guests);
               }}
             />
-
           </View>
         </View>
 
@@ -133,8 +134,6 @@ const RenderExplorer = () => {
             Confirmar Reserva
           </Text>
         </TouchableOpacity>
-
-
       </ScrollView>
 
       <BottomSheet
@@ -167,7 +166,6 @@ const RenderExplorer = () => {
                   <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
                     {qntGuests > 0 ? qntGuests : "--"}
                   </Text>
-
                 </View>
               </View>
 
@@ -188,10 +186,7 @@ const RenderExplorer = () => {
                   marginTop: 30,
                   alignItems: 'center'
                 }}
-                onPress={() => {
-                  // Lógica para confirmar a reserva pode ser adicionada aqui
-                  setIsReserveModalOpen(false);
-                }}
+                onPress={() => router.push("/(tabs)/reservation")}
               >
                 <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>Confirmar Pedido</Text>
               </TouchableOpacity>
