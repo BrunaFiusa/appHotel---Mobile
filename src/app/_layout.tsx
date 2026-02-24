@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 const RootLayout = () => {
     return (
         <AuthProvider>
-            <Stack screenOptions_{{ HeaderShown: false }} />
+            <Stack screenOptions={{ headerShown: false }}/>
         </AuthProvider>
     );
 }
