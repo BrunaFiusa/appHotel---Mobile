@@ -1,29 +1,60 @@
-/*Função: definir o fluxo de navegação entre as telas disponíveis em Tab Navigator:*/
+/*Função: definir o fluxo de navegação entre as telas disponíveis em Tab Navigator:
+Explorar, Reservas, Perfil*/
+import { useAuth } from "@/contexts/AuthContext";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Redirect, Tabs } from "expo-router";
+const TabLayout = () => {
+  const { token, isLoading } = useAuth();
 
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { Tabs } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import "../../components/ui/styles";
+  if (isLoading) return null;
 
-const RootLayout = () => {
-    return (
-        <React.Fragment>
-            <StatusBar style="auto"/>
-            <Tabs screenOptions={{
-                tabBarActiveTintColor: "#f9ddffff",
-                tabBarInactiveTintColor: "#420350ff",
-                headerShown: false,
-                tabBarStyle: {
-                    backgroundColor: "#824590ff",
-                }
-            }}>             
-                <Tabs.Screen name="explorer" options={{title: 'Pesquisar',tabBarIcon: ({ color }) => (<FontAwesome5 name="search" size={24} color={color} />),}} />
-                <Tabs.Screen name="account" options={{ title: 'Minha Conta', tabBarIcon: ({ color }) => (<FontAwesome5 name="user-circle" size={24} color={color} />),}} />
-                <Tabs.Screen name="reservation" options={{ title: 'Reservas',tabBarIcon: ({ color }) => (<FontAwesome5 name="briefcase" size={24} color={color} />),}} />
-            </Tabs>
-        </React.Fragment>
-    )
-}
+  if (!token) {
+    return <Redirect href="/(auth)" />;
+  }
 
-export default RootLayout;
+  return (
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "#420350ff",
+        tabBarInactiveTintColor: "#7c7c7cff",
+        headerShown: false,
+        tabBarStyle: { backgroundColor: "#fef6ffff" },
+      }}
+    >
+      <Tabs.Screen
+        name="explorer"
+        options={{
+          title: "Explorar",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={25} name="search" color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="reservations"
+        options={{
+          title: "Reservar",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              size={25}
+              name="bag-suitcase"
+              color={color}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: "Minha conta",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons size={25} name="account" color={color} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
+};
+export default TabLayout;

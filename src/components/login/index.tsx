@@ -1,55 +1,46 @@
-import { Tabs, useRouter } from "expo-router";
-import React, { useMemo, useState } from 'react';
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "expo-router";
+import React, { useMemo, useState } from "react";
 import { Alert, Dimensions, Text, TouchableOpacity, View } from "react-native";
 import AuthContainer from "../ui/AuthContainer";
 import PasswordField from "../ui/PasswordField";
 import TextField from "../ui/TextField";
 import { global } from "../ui/styles";
-import Explorer from "@/app/(tabs)/explorer";
 
 function isValidEmail(email: string) {
   return /^[^\s@&='"!]@[^\s@&='"!].[^\s@&='"!]$/.test(email);
 }
 const RenderLogin = () => {
+  const { signIn } = useAuth();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [touched, setTouched] = useState<{email?: boolean; password?: boolean}>({});
+  const [touched, setTouched] = useState<{ email?: boolean; password?: boolean; }>({});
 
   const errors = useMemo(() => {
-      const error: Record<string, string> = {};
-      if (touched.email && !email) error.email = "E-mail obrigatório";
-      if (touched.password && !password) error.password = "Senha obrigatória";
-      if (touched.password && password && password.length < 6) error.password = "No mínimo 6 caracteres para a senha";
-      if (touched.email && email && !isValidEmail(email)) error.email = "Digite um e-mail válido";
-      return error;
+    const error: Record<string, string> = {};
+    if (touched.email && !email) error.email = "E-mail obrigatório";
+    if (touched.password && !password) error.password = "Senha obrigatória";
+    if (touched.password && password && password.length < 6) error.password = "No mínimo 6 caracteres para a senha";
+    if (touched.email && email && !isValidEmail(email)) error.email = "Digite um e-mail válido";
+    return error;
   }, [email, password, touched]);
+
   const canSubmit = email && password && Object.keys(errors).length === 0 && !loading;
 
   //Back-end
   const handleSubmit = async () => {
-    try{
-        setLoading(true);
-        console.log("[LOGIN] Tentando login com: ", {
-            email: email,
-            password: password        
-        });
-        await new Promise((req) => setTimeout(req, 2000));
-        if (email === "bru@gmail.com" && password === "123"){
-            Alert.alert("Login bem-sucedido!")
-            router.replace("/(tabs)/explorer")
-        } else {
-            Alert.alert("Login inválido");
-            return;
-        }
+    try {
+      setLoading(true);
+      await signIn(email.trim(), password);
+      Alert.alert("Login bem-sucedido!");
+      router.replace("/(tabs)/explorer");
+    } catch (erro: any) {
+      Alert.alert("Erro", erro?.message || "Falha ao tentar logar!");
+    } finally {
+      setLoading(false);
     }
-    catch (erro) {
-        Alert.alert("Erro", "Falha ao tentar logar!")
-    }
-    finally {
-        setLoading(false);
-    }    
   };
 
   const { width, height } = Dimensions.get("window");

@@ -1,10 +1,11 @@
-import AuthContainer from '../ui/AuthContainer';
-import { TouchableOpacity, View, Text, Dimensions } from "react-native";
-import { Modal, Pressable } from "react-native";
-import PasswordField from "../ui/PasswordField";
-import TextField from "../ui/TextField";
-import { global } from "../ui/styles";
 import { useState } from "react";
+import { Dimensions, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
+import AuthContainer from '../ui/AuthContainer';
+import TextField from "../ui/TextField";
+import PasswordField from "../ui/PasswordField";
+import { global } from "../ui/styles";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "expo-router";
 
 const RenderAccount = () => {
     const [passwordModalVisible, setPasswordModalVisible] = useState(false);
@@ -16,6 +17,12 @@ const RenderAccount = () => {
     const [cpf, setCPF] = useState("");
     const [telefone, setTelefone] = useState("");
     const { width, height } = Dimensions.get('window');
+    const { signOut } = useAuth();
+    const router = useRouter();
+    const logout = async () => {
+        await signOut();
+        router.replace("/(auth)");
+    };
 
     return (
         <AuthContainer
@@ -145,6 +152,13 @@ const RenderAccount = () => {
                     backgroundColor: "#7c8390ff", width: width * 0.5, height: height * 0.001,
                     borderRadius: 10, marginTop: height * 0.03
                 }}></View>
+            </View>
+
+
+            <View>
+                <TouchableOpacity onPress={logout}>
+                    <Text>Sair</Text>
+                </TouchableOpacity>
             </View>
         </AuthContainer>
     )
