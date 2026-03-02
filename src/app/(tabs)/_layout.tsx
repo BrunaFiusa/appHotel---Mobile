@@ -18,7 +18,12 @@ const TabLayout = () => {
         tabBarActiveTintColor: "#420350ff",
         tabBarInactiveTintColor: "#7c7c7cff",
         headerShown: false,
-        tabBarStyle: { backgroundColor: "#fef6ffff" },
+        tabBarStyle: {
+          backgroundColor: "#fef6ffff",
+          justifyContent: 'center',
+          alignItems: "center",
+          height: 60
+        },
       }}
     >
       <Tabs.Screen
