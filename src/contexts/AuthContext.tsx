@@ -56,22 +56,20 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
 
     //CreateAccount
     async function createAccount(nome: string, email: string, senha: string, cpf: string, telefone: string) {
-        const res = await fetch(`${API_URL}/cadastro`, {
+        const res = await fetch(`${API_URL}/login/cadastro`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome, email, senha, cpf, telefone }), // 'nome' incluído aqui
+            body: JSON.stringify({ nome, email, senha, cpf, telefone }), 
         });
 
         if (!res.ok) {
             const err = await res.json().catch(() => null);
-            throw new Error(err?.erro || 'Erro ao criar conta');
+            throw new Error(err?.erro || 'Erro ao criar conta'); 
         }
         const tokenAPI: string = await res.json();
         await AsyncStorage.setItem("token", tokenAPI);
         setToken(tokenAPI);
-        
     }
-    
 
     const value = useMemo (
         () => ({token, isLoading, signIn, signOut, createAccount}), [token, isLoading]

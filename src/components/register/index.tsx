@@ -1,16 +1,18 @@
-import { TouchableOpacity, View, Text, Dimensions, ScrollView } from "react-native";
+import { TouchableOpacity, View, Text, Dimensions, ScrollView, Alert } from "react-native";
 import AuthContainer from "../ui/AuthContainer";
 import PasswordField from "../ui/PasswordField";
 import TextField from "../ui/TextField";
 import { global } from "../ui/styles";
 import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 function isValidEmail(email: string) {
     return /^[^\s@&='"!]@[^\s@&='"!].[^\s@&='"!]$/.test(email);
 }
 
 const RenderRegister = () => {
+    const { createAccount } = useAuth();
     const router = useRouter();
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
@@ -18,7 +20,7 @@ const RenderRegister = () => {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [cpf, setCPF] = useState("");
     const [telefone, setTelefone] = useState("");
-    const [loading, setLoading] = useState("");
+    const [loading, setLoading] = useState(false);
     const [touched, setTouched] = useState<{ email?: boolean; password?: boolean; passwordConfirm?: boolean, cpf?: boolean; telefone?: boolean }>({});
 
     const errors = useMemo(() => {
@@ -31,8 +33,35 @@ const RenderRegister = () => {
         return error;
     }, [email, password, touched])
 
-    const canSubmit = nome && cpf && telefone && email && password && passwordConfirm && Object.keys(errors).length === 0
+    const handleSubmit = async () => {
+        if (!nome || !email || !password || !cpf || !telefone) {
+            Alert.alert("Erro", "Preencha todos os campos!");
+            return;
+        }
 
+        if (password !== passwordConfirm) {
+            Alert.alert("Erro", "As senhas não coincidem!");
+            return;
+        }
+
+        try {
+            setLoading(true);
+            await createAccount(
+                nome.trim(),
+                email.trim(),
+                password.trim(),
+                cpf.replace(/\D/g, ''),
+                telefone.replace(/\D/g, '')
+            );
+
+            Alert.alert("Sucesso", "Conta criada com sucesso!");
+            router.replace("/(tabs)/explorer");
+        } catch (erro: any) {
+            Alert.alert("Erro", erro.message || "Falha ao tentar cadastrar!");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const { width, height } = Dimensions.get('window');
     return (
@@ -99,7 +128,11 @@ const RenderRegister = () => {
                     onChangeText={setPasswordConfirm}
                 />
 
-                <TouchableOpacity style={[global.primaryButton]}>
+                <TouchableOpacity
+                    style={[global.primaryButton, loading && { opacity: 0.7 }]}
+                    onPress={handleSubmit}
+                    disabled={loading}
+                >
                     <Text style={global.primaryButtonText}>Cadastrar</Text>
                 </TouchableOpacity>
 
