@@ -30,7 +30,7 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
     //SignIn
     async function signIn(email: string, senha: string) {
 
-        const res = await fetch(`${API_URL}/client/login`, {
+        const res = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
 
     //CreateAccount
     async function createAccount(nome: string, email: string, senha: string, cpf: string, telefone: string) {
-        const res = await fetch(`${API_URL}/client`, {
+        const res = await fetch(`${API_URL}/cadastro`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nome, email, senha, cpf, telefone }), // 'nome' incluído aqui

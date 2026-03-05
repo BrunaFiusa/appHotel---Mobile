@@ -60,12 +60,12 @@ const RenderAccount = () => {
                 autoComplete="tel"
                 placeholder="Telefone"
                 isMasked={true}
-                    type={'cel-phone'}
-                    options={{
-                        maskType: 'BRL',
-                        withDDD: true,
-                        dddMask: '(99) '
-                    }}
+                type={'cel-phone'}
+                options={{
+                    maskType: 'BRL',
+                    withDDD: true,
+                    dddMask: '(99) '
+                }}
                 value={telefone}
                 onChangeText={setTelefone}
             />
@@ -147,6 +147,14 @@ const RenderAccount = () => {
                 <Text style={global.primaryButtonText}>Privacidade e Segurança</Text>
             </TouchableOpacity>
 
+            <View>
+                <TouchableOpacity onPress={logout}>
+                    <Text style={{ color: "#922222" }}>Sair</Text>
+                </TouchableOpacity>
+            </View>
+
+
+
             <View style={{ alignItems: "center", marginTop: height * 0.03 }}>
                 <View style={{
                     backgroundColor: "#7c8390ff", width: width * 0.5, height: height * 0.001,
@@ -154,12 +162,6 @@ const RenderAccount = () => {
                 }}></View>
             </View>
 
-
-            <View>
-                <TouchableOpacity onPress={logout}>
-                    <Text>Sair</Text>
-                </TouchableOpacity>
-            </View>
         </AuthContainer>
     )
 };
