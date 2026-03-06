@@ -18,42 +18,47 @@ type Props = {
 };
 
 const { width, height } = Dimensions.get("window");
-const RoomCard = ({ image, label, description, icon }: Props) => {
+const RoomCard = ({ image, label, description, icon, onPressReserve }: Props) => {
   return (
     <View style={global.content}>
-     {!!image &&
-      <View><Image style={styles.image} source={image} resizeMode="cover"/></View>}
+      {!!image &&
+        <View><Image style={styles.image} source={image} resizeMode="cover" /></View>}
       <View>
-        {!!label && <Text style={{fontSize: 23, fontWeight: 600, marginTop: height * 0.02}}>{label}</Text>}
+        {!!label && <Text style={{ fontSize: 23, fontWeight: 600, marginTop: height * 0.02 }}>{label}</Text>}
         <View style={styles.container}>
-          <View style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-evenly"}}>
+          <View style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
             {!!icon && (
               <View>
                 {icon.lib === "MaterialIcons" && (
-                  <MaterialIcons name={icon.name} size={23} color="purple"/>
+                  <MaterialIcons name={icon.name} size={23} color="purple" />
                 )}
                 {icon.lib === "FontAwesome5" && (
-                  <FontAwesome5 name={icon.name} size={23} color="purple"/>
+                  <FontAwesome5 name={icon.name} size={23} color="purple" />
                 )}
                 {icon.lib === "FontAwesome6" && (
-                  <FontAwesome6 name={icon.name} size={23} color="purple"/>
+                  <FontAwesome6 name={icon.name} size={23} color="purple" />
                 )}
-                
+
               </View>
             )}
             {!!description && (
               <View style={styles.description}>
                 <View>
-                    <Text style={styles.text}>{description.text}</Text>
+                  <Text style={styles.text}>{description.text}</Text>
                 </View>
                 <View>
                   <Text style={styles.price}>R$ {description.price}</Text>
                 </View>
               </View>
             )}
-            
+
           </View>
         </View>
+
+        <TouchableOpacity style={[global.primaryButton, {paddingVertical: height * 0.007 }]} onPress={onPressReserve}>
+            <Text style={[global.label, {color: "#fff"}]}>Realizar Pedido</Text>
+        </TouchableOpacity>
+
       </View>
     </View>
   );

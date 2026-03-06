@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dimensions, Modal, Pressable, Text, TouchableOpacity, View, ScrollView } from "react-native";
+import { ActivityIndicator, Alert, Dimensions, Modal, Pressable, Text, TouchableOpacity, View, ScrollView } from "react-native";
 import AuthContainer from "../ui/AuthContainer";
 import DateSelector from "../ui/DateSelector";
 import InputSpin from "../ui/InputSpin";
@@ -8,10 +8,11 @@ import TextField from "../ui/TextField";
 import { global } from "../ui/styles";
 import BottomSheet from '../ui/BottomSheet';
 import { useRouter } from "expo-router";
+import { useAuth } from "@/contexts/AuthContext";
 
 const RenderExplorer = () => {
   const router = useRouter();
-  const { width, height } = Dimensions.get("window");
+  const { width } = Dimensions.get("window");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [qntGuests, setQntGuests] = useState<number>(0);
@@ -19,26 +20,37 @@ const RenderExplorer = () => {
   const closeCalendar = () => setCalendar(null);
   const [isReserveModalOpen, setIsReserveModalOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<any>(null);
+  const { searchRoom } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [availableRooms, setAvailableRooms] = useState<any[]>([]);
 
-  const handleOpenReserve = (room: any) => {
-    setSelectedRoom(room);
-    setIsReserveModalOpen(true);
-  };
+  const handleSearch = async () => {
+    if (!checkIn || !checkOut) {
+      Alert.alert("ATENÇÃO!", "Selecione as datas de entrada e saída.");
+      return;
+    }
+    setLoading(true);
+    setAvailableRooms([]);
 
-  const handleConfirmReserve = () => {
-    setSelectedRoom({
-      label: "Apartamento",
-      text: "1 cama de casal\n2 camas de solteiro",
-      price: 180.9,
-    });
-
-    setIsReserveModalOpen(true);
+    try {
+      const rooms = await searchRoom(checkIn, checkOut, qntGuests);
+      setAvailableRooms(rooms || []);
+      console.log(rooms);
+    } catch (error: any) {
+      if (!error?.message?.includes("encontrado")) {
+        Alert.alert("ERRO", "Ocorreu um problema ao buscar quartos.");
+      }
+      setAvailableRooms([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <AuthContainer icon="hotel" title="Grand Hotel Royal">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ display: "flex", justifyContent: "center" }}>
+
           <View style={{ display: "flex", flexDirection: "column" }}>
             <TouchableOpacity onPress={() => setCalendar("checkin")}>
               <View style={{ width: width * 0.8 }}>
@@ -110,6 +122,15 @@ const RenderExplorer = () => {
               }}
             />
           </View>
+          
+          <TouchableOpacity disabled={loading} onPress={handleSearch} style={global.primaryButton}>
+            {loading ? (
+              <ActivityIndicator size="small" color="#420350ff" />
+            ) : (
+              <Text>Consultar disponibilidade</Text>
+            )}
+          </TouchableOpacity>
+
         </View>
 
         <RoomCard
@@ -125,15 +146,6 @@ const RenderExplorer = () => {
             price: 180.9,
           }}
         />
-
-        <TouchableOpacity
-          style={global.primaryButton}
-          onPress={handleConfirmReserve}
-        >
-          <Text style={global.primaryButtonText}>
-            Confirmar Reserva
-          </Text>
-        </TouchableOpacity>
       </ScrollView>
 
       <BottomSheet
@@ -199,3 +211,4 @@ const RenderExplorer = () => {
 };
 
 export default RenderExplorer;
+
